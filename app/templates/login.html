@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Login - ShopDemo{% endblock %}
+{% block content %}
+<div class="card auth-card">
+  <h1>Login</h1>
+  <p class="hint">Try <code>admin / admin123</code> or <code>testuser / password1</code></p>
+  <form method="POST" action="{{ url_for('login') }}">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required autofocus>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit" id="login-btn">Log In</button>
+  </form>
+</div>
+{% endblock %}
