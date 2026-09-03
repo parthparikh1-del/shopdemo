@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed - ShopDemo{% endblock %}
+{% block content %}
+<div class="card" id="order-confirmation">
+  <h1>Order Confirmed!</h1>
+  <p>Order ID: <strong id="order-id">{{ order_id }}</strong></p>
+  <ul>
+    {% for item in order.line_items %}
+    <li>{{ item.name }} x{{ item.qty }} - Rs. {{ item.line_total }}</li>
+    {% endfor %}
+  </ul>
+  <h3>Total Paid: Rs. {{ order.total }}</h3>
+  <a href="{{ url_for('products') }}">Continue Shopping</a>
+</div>
+{% endblock %}
