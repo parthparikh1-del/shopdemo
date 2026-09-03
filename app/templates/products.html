@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Products - ShopDemo{% endblock %}
+{% block content %}
+<h1>Products <span class="cart-badge" id="cart-count">Cart: {{ cart_count }}</span></h1>
+<div class="grid">
+  {% for p in products %}
+  <div class="product-card" data-product-id="{{ p.id }}">
+    <h3>{{ p.name }}</h3>
+    <p class="price">Rs. {{ p.price }}</p>
+    <form method="POST" action="{{ url_for('cart_add', product_id=p.id) }}">
+      <button type="submit" class="add-to-cart-btn" id="add-to-cart-{{ p.id }}">Add to Cart</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
