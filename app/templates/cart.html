@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Cart - ShopDemo{% endblock %}
+{% block content %}
+<h1>Your Cart</h1>
+{% if items %}
+<table class="cart-table">
+  <thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th><th></th></tr></thead>
+  <tbody>
+    {% for item in items %}
+    <tr data-product-id="{{ item.id }}">
+      <td>{{ item.name }}</td>
+      <td>{{ item.qty }}</td>
+      <td>Rs. {{ item.price }}</td>
+      <td>Rs. {{ item.line_total }}</td>
+      <td>
+        <form method="POST" action="{{ url_for('cart_remove', product_id=item.id) }}">
+          <button type="submit" class="remove-btn" id="remove-{{ item.id }}">Remove</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h2 id="cart-total">Total: Rs. {{ total }}</h2>
+<a href="{{ url_for('checkout') }}" id="checkout-btn" class="btn-primary">Proceed to Checkout</a>
+{% else %}
+<p>Your cart is empty. <a href="{{ url_for('products') }}">Go shopping</a>.</p>
+{% endif %}
+{% endblock %}
