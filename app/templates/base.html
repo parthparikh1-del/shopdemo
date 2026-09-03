@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}ShopDemo{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="nav">
+    <a href="{{ url_for('products') if session.get('username') else url_for('login') }}" class="brand">ShopDemo</a>
+    {% if session.get('username') %}
+      <nav>
+        <a href="{{ url_for('products') }}" id="nav-products">Products</a>
+        <a href="{{ url_for('cart_view') }}" id="nav-cart">Cart</a>
+        <span class="user">Hi, {{ session['username'] }}</span>
+        <a href="{{ url_for('logout') }}" id="nav-logout">Logout</a>
+      </nav>
+    {% endif %}
+  </header>
+  <main class="container">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash" id="flash-messages">
+          {% for m in messages %}<p>{{ m }}</p>{% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
